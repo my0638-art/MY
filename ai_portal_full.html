@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+
+<!-- ─── COUNT ─── -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DXWS6HBEF1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DXWS6HBEF1');
+</script>
+<!-- ─── COUNT ─── -->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>의정부시 AI 행정 통합 포털</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #c026d3;
+  --primary2: #7c3aed;
+  --pink: #ec4899;
+  --blue: #3b82f6;
+  --teal: #14b8a6;
+  --green: #22c55e;
+  --orange: #f97316;
+  --purple-soft: #f5e6ff;
+  --bg: #ffffff;
+  --text-dark: #1e1b4b;
+  --text-mid: #4b5563;
+  --text-light: #9ca3af;
+  --radius: 16px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: #fff;
+  color: var(--text-dark);
+  overflow-x: hidden;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: sticky; top: 0; z-index: 200;
+  background: #fff;
+  border-bottom: 1px solid #f3e8ff;
+  box-shadow: 0 2px 12px rgba(192,38,211,.07);
+  padding: 0 48px;
+  height: 58px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo-icon {
+  width: 32px; height: 32px; border-radius: 9px;
+  background: linear-gradient(135deg,#c026d3,#7c3aed);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; color: #fff;
+}
+.nav-logo-text { font-weight: 800; font-size: 14px; color: var(--primary); letter-spacing: -.3px; }
+.nav-right { display: flex; gap: 24px; list-style: none; }
+.nav-right a {
+  text-decoration: none; color: var(--text-mid);
+  font-size: 13px; font-weight: 500;
+  display: flex; align-items: center; gap: 5px;
+  transition: color .2s;
+}
+.nav-right a:hover { color: var(--primary); }
+
+/* ─── HERO ─── */
+.hero {
+  background: linear-gradient(135deg,#fdf4ff 0%,#fce7f3 50%,#ede9fe 100%);
+  padding: 56px 60px;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 40px; align-items: center;
+  min-height: 300px; position: relative; overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 10% 50%,rgba(192,38,211,.09),transparent 60%);
+  pointer-events: none;
+}
+.hero-tag {
+  display: inline-block; background: rgba(192,38,211,.1);
+  color: var(--primary); font-size: 11px; font-weight: 700;
+  padding: 4px 11px; border-radius: 20px; margin-bottom: 14px; letter-spacing: .5px;
+}
+.hero h1 {
+  font-size: 34px; font-weight: 900; color: var(--primary);
+  line-height: 1.2; letter-spacing: -1px; margin-bottom: 14px;
+}
+.hero-sub { font-size: 14px; color: var(--text-mid); line-height: 1.9; font-weight: 500; }
+.hero-note { font-size: 12px; color: var(--text-light); margin: 14px 0 24px; }
+.btn-hero {
+  background: linear-gradient(135deg,#c026d3,#7c3aed);
+  color: #fff; border: none; padding: 12px 24px;
+  border-radius: 30px; font-size: 14px; font-weight: 700;
+  cursor: pointer; font-family: inherit;
+  transition: transform .2s, box-shadow .2s;
+}
+.btn-hero:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(192,38,211,.35); }
+
+/* hero image placeholder */
+.hero-img-box {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 12px 40px rgba(0,0,0,.1);
+  height: 200px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; color: var(--text-light); font-weight: 500;
+  border: 1px solid #f3e8ff;
+  position: relative; overflow: hidden;
+}
+.hero-img-label {
+  position: absolute; top: 14px; left: 14px;
+  font-size: 11px; color: var(--primary); font-weight: 700;
+  background: rgba(192,38,211,.07); padding: 3px 10px; border-radius: 20px;
+}
+
+/* ─── SECTION BASE ─── */
+.section { padding: 70px 60px; }
+.section-title {
+  text-align: center; font-size: 28px; font-weight: 900;
+  color: var(--primary); letter-spacing: -.5px; margin-bottom: 8px;
+}
+.section-sub { text-align: center; font-size: 14px; color: var(--text-mid); margin-bottom: 48px; }
+
+/* ─── AI TOOL CARDS (3 cols) ─── */
+.tool-grid {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 22px; max-width: 1200px; margin: 0 auto 32px;
+}
+.tool-card {
+  border-radius: var(--radius); padding: 26px;
+  border: 2px solid transparent;
+  transition: transform .25s, box-shadow .25s;
+}
+.tool-card:hover { transform: translateY(-5px); box-shadow: 0 18px 44px rgba(0,0,0,.09); }
+.tc-green  { background: linear-gradient(145deg,#f0fdf4,#dcfce7); border-color: #bbf7d0; }
+.tc-blue   { background: linear-gradient(145deg,#eff6ff,#dbeafe); border-color: #bfdbfe; }
+.tc-purple { background: linear-gradient(145deg,#fff0f6,#fce7f3); border-color: #fbcfe8; }
+.tc-orange { background: linear-gradient(145deg,#fff7ed,#ffedd5); border-color: #fed7aa; }
+
+
+.tc-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.tc-logo { display: flex; align-items: center; gap: 10px; }
+.tc-icon {
+  width: 42px; height: 42px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+}
+.ic-green  { background: linear-gradient(135deg,#22c55e,#16a34a); }
+.ic-blue   { background: linear-gradient(135deg,#60a5fa,#2563eb); }
+.ic-purple { background: linear-gradient(135deg,#f472b6,#ec4899); }
+.ic-orange { background: linear-gradient(135deg,#fb923c,#ea580c); }
+
+
+.tc-name { font-size: 18px; font-weight: 800; }
+.tc-tagline { font-size: 12px; line-height: 1.5; margin-top: 2px; font-weight: 500; }
+.cl-green  { color: #15803d; } .cl-blue { color: #1d4ed8; } .cl-purple { color: #be185d; } .cl-orange { color: #c2410c; }
+
+.goto-tag {
+  padding: 6px 13px; border-radius: 20px; font-size: 12px; font-weight: 700;
+  border: none; cursor: pointer; font-family: inherit; white-space: nowrap;
+  transition: transform .15s;
+}
+.goto-tag:hover { transform: scale(1.05); }
+.gt-green  { background: #22c55e; color: #fff; }
+.gt-blue   { background: #3b82f6; color: #fff; }
+.gt-purple { background: #ec4899; color: #fff; }
+.gt-orange { background: #f97316; color: #fff; }
+
+.tc-hr { height: 1px; background: rgba(0,0,0,.07); margin: 14px 0; }
+.tc-section-lbl {
+  font-size: 12px; font-weight: 700; color: var(--text-dark);
+  margin-bottom: 8px; display: flex; align-items: center; gap: 5px;
+}
+.tc-section-lbl::before { content: '↗'; }
+.tc-list { list-style: none; margin-bottom: 16px; }
+.tc-list li {
+  font-size: 12px; color: var(--text-mid); padding: 2px 0 2px 12px;
+  position: relative; line-height: 1.6;
+}
+.tc-list li::before { content: '•'; position: absolute; left: 0; color: var(--text-light); }
+.tc-task-lbl {
+  font-size: 12px; font-weight: 700; color: var(--text-dark);
+  margin-bottom: 6px; display: flex; align-items: center; gap: 5px;
+}
+.tc-task-lbl::before { content: '◎'; font-size: 11px; }
+.tc-task-text { font-size: 12px; color: var(--text-mid); line-height: 1.6; }
+
+/* ─── NOTICE CARDS ─── */
+.notice-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 20px; max-width: 1060px; margin: 0 auto;
+}
+.notice-card {
+  border-radius: var(--radius); padding: 24px 28px;
+  border: 2px solid;
+}
+.nc-red   { background: #fff5f5; border-color: #fecaca; }
+.nc-purple{ background: #faf5ff; border-color: #e9d5ff; }
+.nc-title { font-size: 15px; font-weight: 800; margin-bottom: 12px; display: flex; align-items: center; gap: 7px; }
+.nc-title-red    { color: #dc2626; }
+.nc-title-purple { color: var(--primary2); }
+.nc-body { font-size: 13px; color: var(--text-mid); line-height: 1.8; }
+.nc-note { font-size: 12px; color: var(--text-light); margin-top: 10px; }
+
+/* ─── CHATBOT SECTION ─── */
+.chatbot-section {
+  background: linear-gradient(180deg,#faf5ff 0%,#fff 100%);
+  padding: 70px 60px;
+}
+
+/* category badge */
+.cat-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 12px; border-radius: 20px;
+  font-size: 11px; font-weight: 700; letter-spacing: .3px;
+}
+.cat-write  { background: #ede9fe; color: #7c3aed; }
+.cat-sum    { background: #dbeafe; color: #1d4ed8; }
+.cat-search { background: #dcfce7; color: #15803d; }
+.cat-ppt    { background: #fce7f3; color: #be185d; }
+.cat-analy  { background: #ffedd5; color: #c2410c; }
+.cat-make   { background: #fef9c3; color: #a16207; }
+.cat-fix    { background: #f0fdf4; color: #16a34a; }
+.cat-script { background: #f5f3ff; color: #6d28d9; }
+
+.cb-grid {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 16px; max-width: 1060px; margin: 0 auto;
+}
+.cb-card {
+  background: #fff; border-radius: var(--radius);
+  padding: 20px 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.06);
+  border: 1px solid #f3f4f6;
+  transition: transform .2s, box-shadow .2s;
+}
+.cb-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,.1); }
+.cb-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.cb-card-title { font-size: 14px; font-weight: 700; color: var(--text-dark); margin: 10px 0 6px; }
+.cb-card-desc { font-size: 12px; color: var(--text-mid); line-height: 1.6; margin-bottom: 14px; }
+.cb-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.ai-tag {
+  font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 12px;
+  background: #f3f4f6; color: var(--text-mid);
+}
+.cb-tags a { text-decoration: none; }
+.cb-tags a .ai-tag:hover { opacity: .8; }
+.cb-tags a[href]:focus { outline: none; }
+
+/* 마우스 오버시 하단 링크 주소 숨기기 */
+a[href] {
+  -webkit-user-select: none;
+  user-select: none;
+}
+.cb-tags a, .ait-btn, .goto-tag {
+  cursor: pointer;
+}
+
+/* JS 링크 처리 */
+a.go { cursor: pointer; }
+
+.ai-chatgpt { background: #e8f5e9; color: #2e7d32; }
+.ai-gemini  { background: #e3f2fd; color: #1565c0; }
+
+/* ─── AI TOOLS SECTION ─── */
+.aitools-section {
+  padding: 70px 60px;
+  background: linear-gradient(135deg,#fdf4ff 0%,#f0f9ff 100%);
+}
+.aitools-info {
+  text-align: center; font-size: 14px; font-weight: 600;
+  color: var(--primary); margin-bottom: 16px;
+}
+.aitools-info span { color: var(--text-mid); font-weight: 400; }
+.btn-share {
+  background: linear-gradient(135deg,#c026d3,#7c3aed);
+  color: #fff; border: none; padding: 11px 22px;
+  border-radius: 30px; font-size: 13px; font-weight: 700;
+  cursor: pointer; font-family: inherit;
+  display: inline-flex; align-items: center; gap: 7px;
+  transition: transform .2s, box-shadow .2s;
+  margin-bottom: 40px;
+}
+.btn-share:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(192,38,211,.3); }
+
+.ait-grid {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 22px; max-width: 1100px; margin: 0 auto;
+}
+.ait-card {
+  background: #fff; border-radius: 20px;
+  padding: 28px 22px;
+  box-shadow: 0 4px 18px rgba(0,0,0,.07);
+  border: 1px solid #f3e8ff;
+  transition: transform .25s, box-shadow .25s;
+  display: flex; flex-direction: column;
+}
+.ait-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,.1); }
+.ait-icon {
+  width: 52px; height: 52px; border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; margin-bottom: 14px;
+}
+.ait-whisk     { background: linear-gradient(135deg,#f43f5e,#ec4899); }
+.ait-flow      { background: linear-gradient(135deg,#38bdf8,#2563eb); }
+.ait-notebook  { background: linear-gradient(135deg,#34d399,#059669); }
+.ait-suno      { background: linear-gradient(135deg,#a78bfa,#7c3aed); }
+
+.ait-name { font-size: 18px; font-weight: 800; color: var(--text-dark); margin-bottom: 10px; }
+.ait-desc { font-size: 12.5px; color: var(--text-mid); line-height: 1.7; margin-bottom: 12px; }
+.ait-when-lbl { font-size: 12px; font-weight: 700; color: var(--text-dark); margin-bottom: 4px; }
+.ait-when-text { font-size: 12px; color: var(--text-mid); line-height: 1.6; margin-bottom: 12px; }
+.ait-merit-lbl { font-size: 12px; font-weight: 700; color: var(--text-dark); margin-bottom: 4px; }
+.ait-merit-text { font-size: 12px; color: var(--text-mid); line-height: 1.6; flex: 1; margin-bottom: 18px; }
+.ait-btn {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  border: none; border-radius: 12px; padding: 12px;
+  font-size: 13px; font-weight: 700; cursor: pointer; font-family: inherit;
+  color: #fff; transition: opacity .2s, transform .15s;
+  width: 100%;
+}
+.ait-btn:hover { opacity: .9; transform: translateY(-1px); }
+.btn-whisk    { background: linear-gradient(135deg,#f43f5e,#ec4899); }
+.btn-flow     { background: linear-gradient(135deg,#38bdf8,#2563eb); }
+.btn-notebook { background: linear-gradient(135deg,#34d399,#059669); }
+.btn-suno     { background: linear-gradient(135deg,#a78bfa,#7c3aed); }
+
+/* ─── FOOTER CTA ─── */
+.footer-cta {
+  text-align: center; padding: 50px 40px;
+  background: linear-gradient(135deg,#fdf4ff,#ede9fe);
+}
+.btn-footer-cta {
+  background: linear-gradient(135deg,#c026d3,#7c3aed);
+  color: #fff; border: none; padding: 16px 36px;
+  border-radius: 30px; font-size: 15px; font-weight: 700;
+  cursor: pointer; font-family: inherit;
+  transition: transform .2s, box-shadow .2s;
+}
+.btn-footer-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(192,38,211,.35); }
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero > * { animation: fadeUp .6s ease both; }
+.hero > *:nth-child(2) { animation-delay: .15s; }
+
+@media (max-width: 960px) {
+  .hero { grid-template-columns: 1fr; padding: 40px 24px; }
+  .tool-grid, .cb-grid, .ait-grid { grid-template-columns: 1fr 1fr; }
+  .notice-grid { grid-template-columns: 1fr; }
+  .section, .chatbot-section, .aitools-section { padding: 50px 24px; }
+  nav { padding: 0 20px; }
+}
+@media (max-width: 600px) {
+  .tool-grid, .cb-grid, .ait-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── VISITOR COUNTER ─── */
+.visitor-bar {
+  background: linear-gradient(135deg,#1e1b4b 0%,#3b0764 100%);
+  padding: 8px 48px;
+  display: flex; align-items: center; justify-content: flex-end; gap: 24px;
+}
+.visitor-item {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: rgba(255,255,255,.65); font-weight: 500;
+}
+.visitor-item strong {
+  color: #e879f9; font-weight: 800; font-size: 13px;
+  min-width: 48px; text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.visitor-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: #22c55e;
+  box-shadow: 0 0 0 2px rgba(34,197,94,.25);
+  animation: pulse-dot 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes pulse-dot {
+  0%,100% { box-shadow: 0 0 0 2px rgba(34,197,94,.25); }
+  50%      { box-shadow: 0 0 0 5px rgba(34,197,94,.1); }
+}
+.visitor-sep { color: rgba(255,255,255,.2); font-size: 14px; }
+@media (max-width: 960px) { .visitor-bar { padding: 8px 20px; } }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">✦</div>
+    <span class="nav-logo-text">의정부시 AI 행정 통합 포털</span>
+  </a>
+  <ul class="nav-right">
+    <li><a href="#">🏠 홈</a></li>
+    <li><a href="의정부시AI업무지원포털사용법.pdf">📋 사용 가이드</a></li>
+  </ul>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div>
+    <div class="hero-tag">✦ AI 행정 통합 플랫폼</div>
+    <h1>의정부시 AI<br>행정 통합 포털</h1>
+    <p class="hero-sub">꼭필요한 디지털 자원의 단일 플랫폼화</p>
+    <p class="hero-sub">기술 장벽을 허무는 사용자 중심 UI/UX 구현</p>
+    <p class="hero-note">* AI 업무지원 포털은 AI 기술을 활용하여 구축하였습니다.</p>
+    <div style="display:flex; gap:12px; flex-wrap:wrap;">
+      <button class="btn-hero" onclick="document.getElementById('chatbot-section').scrollIntoView({behavior:'smooth'})">챗봇서비스 바로가기 ↓</button>
+      <button class="btn-hero" style="background: linear-gradient(135deg,#a855f7,#ec4899); opacity:.9;" onclick="window.open('prompt_page.html','_blank')">AI 프롬프트 공개 →</button>
+    </div>
+  </div>
+  <div class="hero-img-box">
+    <span class="hero-img-label">🏛 의정부시 청사</span>
+    <svg viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+      <defs>
+        <linearGradient id="hsky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#fde68a"/><stop offset="100%" stop-color="#fca5a5"/>
+        </linearGradient>
+      </defs>
+      <rect width="480" height="200" fill="url(#hsky)"/>
+      <rect x="0" y="160" width="480" height="40" fill="#86efac" opacity=".4"/>
+      <!-- buildings -->
+      <rect x="40" y="70" width="50" height="100" rx="3" fill="#c084fc"/>
+      <rect x="40" y="70" width="50" height="10" rx="3" fill="#a855f7"/>
+      <rect x="48" y="86" width="9" height="9" rx="2" fill="#fde68a" opacity=".9"/>
+      <rect x="62" y="86" width="9" height="9" rx="2" fill="#fff" opacity=".7"/>
+      <rect x="76" y="86" width="9" height="9" rx="2" fill="#fde68a" opacity=".9"/>
+      <rect x="48" y="100" width="9" height="9" rx="2" fill="#fff" opacity=".7"/>
+      <rect x="62" y="100" width="9" height="9" rx="2" fill="#fde68a" opacity=".9"/>
+      <rect x="76" y="100" width="9" height="9" rx="2" fill="#fff" opacity=".7"/>
+      <rect x="48" y="114" width="9" height="9" rx="2" fill="#fde68a" opacity=".9"/>
+      <rect x="62" y="114" width="9" height="9" rx="2" fill="#fff" opacity=".7"/>
+      <rect x="76" y="114" width="9" height="9" rx="2" fill="#fde68a" opacity=".9"/>
+
+      <rect x="120" y="90" width="55" height="80" rx="3" fill="#7dd3fc"/>
+      <rect x="120" y="90" width="55" height="10" rx="3" fill="#38bdf8"/>
+      <rect x="127" y="106" width="9" height="9" rx="2" fill="#fde68a" opacity=".9"/>
+      <rect x="141" y="106" width="9" height="9" rx="2" fill="#fff" opacity=".7"/>
+      <rect x="157" y="106" width="9" height="9" rx="2" fill="#fde68a" opacity=".9"/>
+      <rect x="127" y="120" width="9" height="9" rx="2" fill="#fff" opacity=".7"/>
+      <rect x="141" y="120" width="9" height="9" rx="2" fill="#fde68a" opacity=".9"/>
+      <rect x="157" y="120" width="9" height="9" rx="2" fill="#fff" opacity=".7"/>
+
+      <rect x="290" y="100" width="48" height="70" rx="3" fill="#86efac"/>
+      <rect x="290" y="100" width="48" height="9" rx="3" fill="#4ade80"/>
+      <rect x="297" y="114" width="8" height="8" rx="2" fill="#fde68a" opacity=".9"/>
+      <rect x="310" y="114" width="8" height="8" rx="2" fill="#fff" opacity=".7"/>
+      <rect x="323" y="114" width="8" height="8" rx="2" fill="#fde68a" opacity=".9"/>
+      <rect x="297" y="127" width="8" height="8" rx="2" fill="#fff" opacity=".7"/>
+      <rect x="310" y="127" width="8" height="8" rx="2" fill="#fde68a" opacity=".9"/>
+      <rect x="323" y="127" width="8" height="8" rx="2" fill="#fff" opacity=".7"/>
+
+      <rect x="370" y="60" width="60" height="110" rx="3" fill="#fdba74"/>
+      <rect x="370" y="60" width="60" height="12" rx="3" fill="#fb923c"/>
+      <rect x="397" y="46" width="3" height="16" fill="#f97316"/><circle cx="398" cy="44" r="4" fill="#ef4444"/>
+      <rect x="377" y="78" width="9" height="9" rx="2" fill="#fde68a" opacity=".9"/>
+      <rect x="391" y="78" width="9" height="9" rx="2" fill="#fff" opacity=".7"/>
+      <rect x="407" y="78" width="9" height="9" rx="2" fill="#fde68a" opacity=".9"/>
+      <rect x="377" y="92" width="9" height="9" rx="2" fill="#fff" opacity=".7"/>
+      <rect x="391" y="92" width="9" height="9" rx="2" fill="#fde68a" opacity=".9"/>
+      <rect x="407" y="92" width="9" height="9" rx="2" fill="#fff" opacity=".7"/>
+      <rect x="377" y="106" width="9" height="9" rx="2" fill="#fde68a" opacity=".9"/>
+      <rect x="391" y="106" width="9" height="9" rx="2" fill="#fff" opacity=".7"/>
+      <rect x="407" y="106" width="9" height="9" rx="2" fill="#fde68a" opacity=".9"/>
+
+      <!-- road -->
+      <rect x="0" y="154" width="480" height="16" fill="#9ca3af" opacity=".6"/>
+      <rect x="30" y="160" width="28" height="3" fill="#fff" rx="2" opacity=".7"/>
+      <rect x="90" y="160" width="28" height="3" fill="#fff" rx="2" opacity=".7"/>
+      <rect x="160" y="160" width="28" height="3" fill="#fff" rx="2" opacity=".7"/>
+      <rect x="230" y="160" width="28" height="3" fill="#fff" rx="2" opacity=".7"/>
+      <rect x="300" y="160" width="28" height="3" fill="#fff" rx="2" opacity=".7"/>
+      <rect x="370" y="160" width="28" height="3" fill="#fff" rx="2" opacity=".7"/>
+
+      <!-- cars -->
+      <rect x="150" y="154" width="26" height="13" rx="4" fill="#f43f5e"/>
+      <circle cx="154" cy="167" r="3" fill="#1f2937"/><circle cx="172" cy="167" r="3" fill="#1f2937"/>
+      <rect x="320" y="154" width="26" height="13" rx="4" fill="#3b82f6"/>
+      <circle cx="324" cy="167" r="3" fill="#1f2937"/><circle cx="342" cy="167" r="3" fill="#1f2937"/>
+
+      <!-- trees -->
+      <circle cx="18" cy="152" r="14" fill="#4ade80"/><rect x="15" y="154" width="5" height="12" fill="#92400e"/>
+      <circle cx="460" cy="150" r="16" fill="#4ade80"/><rect x="457" y="152" width="5" height="14" fill="#92400e"/>
+
+      <!-- clouds -->
+      <ellipse cx="200" cy="28" rx="45" ry="18" fill="#fff" opacity=".7"/>
+      <ellipse cx="180" cy="32" rx="28" ry="14" fill="#fff" opacity=".7"/>
+      <ellipse cx="228" cy="32" rx="28" ry="14" fill="#fff" opacity=".7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ─── AI TOOL SELECTION ─── -->
+<section class="section">
+  <h2 class="section-title">어떤 AI 도구를 선택할까요?</h2>
+  <p class="section-sub">업무 목적에 따라 최적의 AI 도구를 선택하여 업무 효율을 극대화하세요.</p>
+
+  <div class="tool-grid">
+    <!-- ChatGPT -->
+    <div class="tool-card tc-green">
+      <div class="tc-head">
+        <div class="tc-logo">
+          <div class="tc-icon ic-green">💬</div>
+          <div>
+            <div class="tc-name">ChatGPT</div>
+            <div class="tc-tagline cl-green">창의적 글쓰기와 논리적 추론의 강자</div>
+          </div>
+        </div>
+        <a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer"><button class="goto-tag gt-green">바로가기 ↗</button></a>
+      </div>
+      <div class="tc-hr"></div>
+      <div class="tc-section-lbl">주요 장점</div>
+      <ul class="tc-list">
+        <li>자연스럽고 논리적인 문장 구성력</li>
+        <li>복잡한 개념의 쉬운 설명 및 요약</li>
+        <li>다양한 스타일의 창의적 글쓰기(시나리오, 이메일 등)</li>
+      </ul>
+      <div class="tc-task-lbl">추천업무</div>
+      <p class="tc-task-text">문서 초안 작성, 복잡한 자료 요약, 문장 교정 및 분석 등</p>
+    </div>
+
+    <!-- Gemini -->
+    <div class="tool-card tc-blue">
+      <div class="tc-head">
+        <div class="tc-logo">
+          <div class="tc-icon ic-blue">✦</div>
+          <div>
+            <div class="tc-name">Gemini</div>
+            <div class="tc-tagline cl-blue">실시간 정보와 멀티모달 분석의 전문가</div>
+          </div>
+        </div>
+        <a href="https://gemini.google.com" target="_blank" rel="noopener noreferrer"><button class="goto-tag gt-blue">바로가기 ↗</button></a>
+      </div>
+      <div class="tc-hr"></div>
+      <div class="tc-section-lbl">주요 장점</div>
+      <ul class="tc-list">
+        <li>구글 검색 기반의 실시간 최신 정보 반영</li>
+        <li>이미지, 비디오 등 멀티모달 복합적인 분석·이해 능력이 뛰어남</li>
+        <li>구글 워크스페이스와의 원활한 연동 가능</li>
+      </ul>
+      <div class="tc-task-lbl">추천 업무</div>
+      <p class="tc-task-text">최신 트렌드 조사, 이미지/동영상 분석, 데이터 시각화, 구글 앱 연동 작업</p>
+    </div>
+
+    <!-- Claude -->
+    <div class="tool-card tc-purple">
+      <div class="tc-head">
+        <div class="tc-logo">
+          <div class="tc-icon ic-purple">✦</div>
+          <div>
+            <div class="tc-name">Claude</div>
+            <div class="tc-tagline cl-purple">깊이 있는 분석과<br>안전한 대화의 전문가</div>
+          </div>
+        </div>
+        <a href="https://claude.ai" target="_blank" rel="noopener noreferrer"><button class="goto-tag gt-purple">바로가기 ↗</button></a>
+      </div>
+      <div class="tc-hr"></div>
+      <div class="tc-section-lbl">주요 장점</div>
+      <ul class="tc-list">
+        <li>긴 문서·계약서·보고서의 정밀한 분석 및 요약</li>
+        <li>논리적이고 균형 잡힌 답변으로 신뢰도 높음</li>
+        <li>안전하고 윤리적인 응답 설계로 공공업무에 적합</li>
+      </ul>
+      <div class="tc-task-lbl">추천업무</div>
+      <p class="tc-task-text">장문 문서 검토, 정책 분석, 복잡한 행정 문서 작성 및 교정</p>
+    </div>
+
+    <!-- 범정부 AI -->
+    <div class="tool-card tc-orange">
+      <div class="tc-head">
+        <div class="tc-logo">
+          <div class="tc-icon ic-orange">🛡</div>
+          <div>
+            <div class="tc-name">범정부 AI</div>
+            <div class="tc-tagline cl-orange">공공기관 중심 보안 AI 플랫폼</div>
+          </div>
+        </div>
+        <a href="https://chat.ai.go.kr/main" target="_blank" rel="noopener noreferrer"><button class="goto-tag gt-orange">바로가기 ↗</button></a>
+      </div>
+      <div class="tc-hr"></div>
+      <div class="tc-section-lbl">주요 장점</div>
+      <ul class="tc-list">
+        <li>공공기관 전용 보안 강화 AI 서비스</li>
+        <li>행정안전부 인증 및 관리 시스템</li>
+        <li>민감정보 처리 가능한 안전한 환경</li>
+      </ul>
+      <div class="tc-task-lbl">추천 업무</div>
+      <p class="tc-task-text">공문서 작성, 정책 분석, 민원 처리, 내부 보고서 작성 등 보안이 필요한 업무</p>
+    </div>
+
+  </div>
+
+  <!-- NOTICE CARDS -->
+  <div class="notice-grid">
+    <div class="notice-card nc-red">
+      <div class="nc-title nc-title-red">⚠ 보안 주의사항 (필독)</div>
+      <div class="nc-body">개인정보 및 업무 자료는 절대 입력하지 마세요.</div>
+      <div class="nc-note">* AI 도구 사용 시 보안 정책을 반드시 준수해주세요</div>
+    </div>
+    <div class="notice-card nc-purple">
+      <div class="nc-title nc-title-purple">ℹ 이용 및 접속 안내</div>
+      <div class="nc-body">모든 서비스는 로그인(구글 계정 등)이 필요합니다.</div>
+      <div class="nc-note">* Tip: 개인용 구글 계정 별도로 생성하여 업무하면 더욱 안전하고 편리합니다.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CHATBOT SECTION ─── -->
+<section class="chatbot-section" id="chatbot-section">
+  <h2 class="section-title">맞춤형 행정 챗봇 서비스</h2>
+  <p class="section-sub">* 업무 유형별 복잡한 프롬프트 엔지니어링 없이 단순 형태로 최적화된 AI 서비스를 제공합니다.</p>
+
+  <div class="cb-grid">
+    <!-- Row 1 -->
+    <div class="cb-card">
+      <div class="cb-card-top"><span class="cat-badge cat-write">✏ 작성</span></div>
+      <div class="cb-card-title">보고자료 초안 작성</div>
+      <div class="cb-card-desc">맞춤형 보도자료 초안 자동 생성, 핵심 내용만 입력해도 초안 제공, 맞춤법/오타 자동 검사</div>
+      <div class="cb-tags"><a href="https://chatgpt.com/g/g-678dd074cc0c81918408260cd9d78a38-yijeongbusi-bodojaryo-coan-jagseong-caesbos" target="_blank" rel="noopener noreferrer"><span class="ai-tag ai-chatgpt">ChatGPT</span></a><a href="https://gemini.google.com/gem/a896013c528f?usp=sharing" target="_blank" rel="noopener noreferrer"><span class="ai-tag ai-gemini">Gemini</span></a></div>
+    </div>
+    <div class="cb-card">
+      <div class="cb-card-top"><span class="cat-badge cat-write">✏ 작성</span></div>
+      <div class="cb-card-title">인사말 초안 작성</div>
+      <div class="cb-card-desc">맞춤형 인사말씀 초안 생성, 작문 작성 가능</div>
+      <div class="cb-tags"><a href="https://chatgpt.com/g/g-6763ac1e0aac819181b11f98add6d348-insamal-coan-jagseong" target="_blank" rel="noopener noreferrer"><span class="ai-tag ai-chatgpt">ChatGPT</span></a><a href="https://gemini.google.com/gem/e6c1856daa44?usp=sharing" target="_blank" rel="noopener noreferrer"><span class="ai-tag ai-gemini">Gemini</span></a></div>
+    </div>
+    <div class="cb-card">
+      <div class="cb-card-top"><span class="cat-badge cat-write">✏ 작성</span></div>
+      <div class="cb-card-title">보고서/책자서 초안 작성</div>
+      <div class="cb-card-desc">보고서 및 계획안 초안 자동 생성</div>
+      <div class="cb-tags"><a href="https://chatgpt.com/g/g-685bb12c40608191b69e0544b789f5a0-gyehoegseo-bogoseo-coanjagseong" target="_blank" rel="noopener noreferrer"><span class="ai-tag ai-chatgpt">ChatGPT</span></a><a href="https://gemini.google.com/gem/3eb2275a58c4?usp=sharing" target="_blank" rel="noopener noreferrer"><span class="ai-tag ai-gemini">Gemini</span></a></div>
+    </div>
+    <div class="cb-card">
+      <div class="cb-card-top"><span class="cat-badge cat-write">✏ 작성</span></div>
+      <div class="cb-card-title">국민신문고 민원답변 초안 작성</div>
+      <div class="cb-card-desc">국민신문고 민원 답변 내용 표준안 및 처리 시 유의사항이 반영된 초안 작성</div>
+      <div class="cb-tags"><a href="https://chatgpt.com/g/g-67ff6f4dab2c8191b1d0cfc023ccf417-gugminsinmungo-minweon-dabbyeon-coan-jagseong" target="_blank" rel="noopener noreferrer"><span class="ai-tag ai-chatgpt">ChatGPT</span></a><a href="https://gemini.google.com/gem/48fa2e2544bf?usp=sharing" target="_blank" rel="noopener noreferrer"><span class="ai-tag ai-gemini">Gemini</span></a></div>
+    </div>
+
+    <!-- Row 2 -->
+    <div class="cb-card">
+      <div class="cb-card-top"><span class="cat-badge cat-sum">📝 요약</span></div>
+      <div class="cb-card-title">회의록 요약</div>
+      <div class="cb-card-desc">회의록 텍스트 요약보고서 자동 생성</div>
+      <div class="cb-tags"><a href="https://chatgpt.com/g/g-6785f9a96de08191941c44e058e9fbf5-hoeyirog-yoyag" target="_blank" rel="noopener noreferrer"><span class="ai-tag ai-chatgpt">ChatGPT</span></a></div>
+    </div>
+    <div class="cb-card">
+      <div class="cb-card-top"><span class="cat-badge cat-search">🔍 검색</span></div>
+      <div class="cb-card-title">자료검색</div>
+      <div class="cb-card-desc">특정 웹사이트 내용 요약 및 분석</div>
+      <div class="cb-tags"><a href="https://chatgpt.com/g/g-678daf9f1280819190c2cabf4350ed6d-jaryogeomsaeg" target="_blank" rel="noopener noreferrer"><span class="ai-tag ai-gemini">Gemini</span></a></div>
+    </div>
+    <div class="cb-card">
+      <div class="cb-card-top"><span class="cat-badge cat-ppt">🖼 작성</span></div>
+      <div class="cb-card-title">파워포인트 작성</div>
+      <div class="cb-card-desc">파워포인트 초안 자동생성, 슬라이드별 예시 포함 가능</div>
+      <div class="cb-tags"><a href="https://chatgpt.com/g/g-67a059a20ac4819188e6c5668e90490a-paweopointeu-coan-jagseong" target="_blank" rel="noopener noreferrer"><span class="ai-tag ai-chatgpt">ChatGPT</span></a><a href="https://gemini.google.com/gem/1d7205aefb8d?usp=sharing" target="_blank" rel="noopener noreferrer"><span class="ai-tag ai-gemini">Gemini</span></a></div>
+    </div>
+    <div class="cb-card">
+      <div class="cb-card-top"><span class="cat-badge cat-analy">📊 분석</span></div>
+      <div class="cb-card-title">공공데이터 분석</div>
+      <div class="cb-card-desc">공공데이터 분석 및 인사이트 도출</div>
+      <div class="cb-tags"><a href="https://chatgpt.com/g/g-67b6df577d54819184b045475cb8ebd8-gonggongdeiteo-www-data-go-kr-bunseog" target="_blank" rel="noopener noreferrer"><span class="ai-tag ai-chatgpt">ChatGPT</span></a><a href="https://gemini.google.com/gem/a691c99aa105?usp=sharing" target="_blank" rel="noopener noreferrer"><span class="ai-tag ai-gemini">Gemini</span></a></div>
+    </div>
+
+    <!-- Row 3 -->
+    <div class="cb-card">
+      <div class="cb-card-top"><span class="cat-badge cat-write">✏ 작성</span></div>
+      <div class="cb-card-title">블로그 만들기</div>
+      <div class="cb-card-desc">행사, 관광, 맛집, 정책 등 블로그 글 초안작성</div>
+      <div class="cb-tags"><a href="https://chatgpt.com/g/g-67b5346ebeec81918c5456142b3d6528-neibeo-beulrogeu-coan-jagseong" target="_blank" rel="noopener noreferrer"><span class="ai-tag ai-chatgpt">ChatGPT</span></a></div>
+    </div>
+    <div class="cb-card">
+      <div class="cb-card-top"><span class="cat-badge cat-make">🛠 작성</span></div>
+      <div class="cb-card-title">제목만들기</div>
+      <div class="cb-card-desc">행사/정책 등 주제기반 흥미로운 제목 생성</div>
+      <div class="cb-tags"><a href="https://chatgpt.com/g/g-67bfcc98a71081918d1d80a266c6e9e1-jemog-mandeulgi-caesbos-kapiraiteo" target="_blank" rel="noopener noreferrer"><span class="ai-tag ai-chatgpt">ChatGPT</span></a><a href="https://gemini.google.com/gem/b0a17020fcec?usp=sharing" target="_blank" rel="noopener noreferrer"><span class="ai-tag ai-gemini">Gemini</span></a></div>
+    </div>
+    <div class="cb-card">
+      <div class="cb-card-top"><span class="cat-badge cat-write">✏ 작성</span></div>
+      <div class="cb-card-title">공적조서 초안 작성</div>
+      <div class="cb-card-desc">공적요지, 공적사항 포함 공적조서 자동 생성</div>
+      <div class="cb-tags"><a href="https://chatgpt.com/g/g-67c8f2ae3c908191ab61473287b0a65e-gongjeogjoseo-coan-jagseong" target="_blank" rel="noopener noreferrer"><span class="ai-tag ai-chatgpt">ChatGPT</span></a><a href="https://gemini.google.com/gem/b35fe4ec063d?usp=sharing" target="_blank" rel="noopener noreferrer"><span class="ai-tag ai-gemini">Gemini</span></a></div>
+    </div>
+    <div class="cb-card">
+      <div class="cb-card-top"><span class="cat-badge cat-search">🔍 검색</span></div>
+      <div class="cb-card-title">법령 검색 및 해석</div>
+      <div class="cb-card-desc">법령 검색, 조항 해석, 관련 사례 제공</div>
+      <div class="cb-tags"><a href="https://chatgpt.com/g/g-67ce71996998819193ba0895ff87c3e8-beobryeong-geomsaeg-mic-haeseog" target="_blank" rel="noopener noreferrer"><span class="ai-tag ai-chatgpt">ChatGPT</span></a><a href="https://gemini.google.com/gem/33d12a5ffc30?usp=sharing" target="_blank" rel="noopener noreferrer"><span class="ai-tag ai-gemini">Gemini</span></a></div>
+    </div>
+
+    <!-- Row 4 -->
+    <div class="cb-card">
+      <div class="cb-card-top"><span class="cat-badge cat-analy">📊 분석</span></div>
+      <div class="cb-card-title">업무관련 예상 질의 및 답변</div>
+      <div class="cb-card-desc">특정 정책에 대한 공식적인 예상 질의와 답변</div>
+      <div class="cb-tags"><a href="https://chatgpt.com/g/g-67d26a26aab48191951213cdefdcb9e1-eobmugwanryeon-yesang-jilyi-mic-dabbyeon" target="_blank" rel="noopener noreferrer"><span class="ai-tag ai-chatgpt">ChatGPT</span></a><a href="https://gemini.google.com/gem/4beeed29bb27?usp=sharing" target="_blank" rel="noopener noreferrer"><span class="ai-tag ai-gemini">Gemini</span></a></div>
+    </div>
+    <div class="cb-card">
+      <div class="cb-card-top"><span class="cat-badge cat-fix">✔ 교정</span></div>
+      <div class="cb-card-title">맞춤법, 띄어쓰기, 문법 등 점검</div>
+      <div class="cb-card-desc">입력된 문장을 검토하여 맞춤법, 띄어쓰기, 문법, 표현, 문장, 종결 어미 등을 점검</div>
+      <div class="cb-tags"><a href="https://chatgpt.com/g/g-67fcb36aa1308191a2de36632f750996-majcumbeob-ddyieosseugi-munbeob-pyohyeon-munjang-jonggyeol-eomi-deungeul-jeomgeom" target="_blank" rel="noopener noreferrer"><span class="ai-tag ai-chatgpt">ChatGPT</span></a><a href="https://gemini.google.com/gem/ab1357f73c44?usp=sharing" target="_blank" rel="noopener noreferrer"><span class="ai-tag ai-gemini">Gemini</span></a></div>
+    </div>
+    <div class="cb-card">
+      <div class="cb-card-top"><span class="cat-badge cat-fix">✔ 교정</span></div>
+      <div class="cb-card-title">문장 확장 작성</div>
+      <div class="cb-card-desc">사용자가 입력한 일반적인 짧은 글을 기반으로, 전문성 있고 풍부한 콘텐츠로 확장</div>
+      <div class="cb-tags"><a href="https://chatgpt.com/g/g-67fc99c421b08191acad9f028fc9e6a0-munjang-hwagjang-jagseong" target="_blank" rel="noopener noreferrer"><span class="ai-tag ai-chatgpt">ChatGPT</span></a><a href="https://gemini.google.com/gem/e0f90d6f12f3?usp=sharing" target="_blank" rel="noopener noreferrer"><span class="ai-tag ai-gemini">Gemini</span></a></div>
+    </div>
+    <div class="cb-card">
+      <div class="cb-card-top"><span class="cat-badge cat-write">✏ 작성</span></div>
+      <div class="cb-card-title">조례 제/개정 초안 작성</div>
+      <div class="cb-card-desc">조례 제/개정 초안 작성, 조례안 형식에 맞게 수정</div>
+      <div class="cb-tags"><a href="https://chatgpt.com/g/g-6849039b92ac819199bea64d33254223-jorye-je-gaejeong-coan-jagseong" target="_blank" rel="noopener noreferrer"><span class="ai-tag ai-chatgpt">ChatGPT</span></a></div>
+    </div>
+
+    <!-- Row 5 -->
+    <div class="cb-card" style="grid-column:span 1">
+      <div class="cb-card-top"><span class="cat-badge cat-script">🎬 시나리오</span></div>
+      <div class="cb-card-title">발표 시나리오 초안 작성</div>
+      <div class="cb-card-desc">교육/회의/세미나/워크숍 등 발표시나리오 초안 작성</div>
+      <div class="cb-tags"><a href="https://chatgpt.com/g/g-686dc7d1b14881918f3b6f021b0c6542-gyoyug-hoeyi-semina-weokeusyob-deung-balpyo-sinario-coan-jagseong" target="_blank" rel="noopener noreferrer"><span class="ai-tag ai-chatgpt">ChatGPT</span></a><a href="https://gemini.google.com/gem/155105e734dc?usp=sharing" target="_blank" rel="noopener noreferrer"><span class="ai-tag ai-gemini">Gemini</span></a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── AI TOOLS EFFICIENCY ─── -->
+<section class="aitools-section">
+  <h2 class="section-title">업무 효율을 높이는 AI 도구</h2>
+  <p class="section-sub">다양한 AI 도구를 통합하여 업무 효율성을 극대화하세요.</p>
+  <div style="text-align:center">
+    <p class="aitools-info">* AI 도구 사용방법은 공유함에서 확인할 수 있습니다.</p>
+    <button class="btn-share" onclick="window.open('https://www.onnara.go.kr/community/200015951/%EC%9D%98%EC%A0%95%EB%B6%80%EC%8B%9CAI%EC%9D%B4%EB%AF%B8%EC%A7%80%EB%8F%99%EC%98%81%EC%83%81%ED%8C%8C%EC%9D%BC%EA%B3%B5%EC%9C%A0%ED%95%A8/99982/F1070001','_blank','noopener,noreferrer')">✦ 공유함 바로가기</button>
+  </div>
+
+  <div class="ait-grid">
+    <!-- Bing 크리에이터 -->
+    <div class="ait-card">
+      <div class="ait-icon ait-whisk">🎨</div>
+      <div class="ait-name">Bing 크리에이터</div>
+      <div class="ait-desc">Microsoft AI 기반 이미지 생성 도구로, 텍스트 설명만으로 고품질 이미지를 생성합니다.</div>
+      <div class="ait-when-lbl">언제 사용하나요?</div>
+      <div class="ait-when-text">홍보물, SNS 콘텐츠 제작 시 텍스트 설명만으로 원하는 이미지가 필요할 때</div>
+      <div class="ait-merit-lbl">주요 장점</div>
+      <div class="ait-merit-text">DALL-E 기반의 고품질 이미지를 무료로 빠르게 생성 가능</div>
+      <button class="ait-btn btn-whisk" onclick="window.open('https://www.bing.com/images/create','_blank','noopener,noreferrer')">↗ 바로가기</button>
+    </div>
+
+    <!-- Flow -->
+    <div class="ait-card">
+      <div class="ait-icon ait-flow">▶</div>
+      <div class="ait-name">Flow</div>
+      <div class="ait-desc">AI 기반 영상 제작 도구로, 누구나 전문가 수준의 영상을 만들 수 있게 돕는 AI 기반 영상을 제작합니다.</div>
+      <div class="ait-when-lbl">언제 사용하나요?</div>
+      <div class="ait-when-text">아이디어를 빠르게 영상으로 구현하여 전체적인 흐름을 확인하고 싶을 때</div>
+      <div class="ait-merit-lbl">주요 장점</div>
+      <div class="ait-merit-text">텍스트와 이미지만으로 조명, 카메라 앵글, 움직임의 강도를 세밀하게 조절</div>
+      <button class="ait-btn btn-flow" onclick="window.open('https://labs.google/fx/ko/tools/flow','_blank','noopener,noreferrer')">↗ 바로가기</button>
+    </div>
+
+    <!-- NotebookLM -->
+    <div class="ait-card">
+      <div class="ait-icon ait-notebook">📓</div>
+      <div class="ait-name">NotebookLM</div>
+      <div class="ait-desc">AI 기반 문서 노트 도구로, 대용량 자료를 분석하고 요약하여 인사이트를 제공합니다.</div>
+      <div class="ait-when-lbl">언제 사용하나요?</div>
+      <div class="ait-when-text">회의록, 보고서, 연구 자료 등 대량의 문서를 빠르게 분석하고 핵심 내용을 파악할 때</div>
+      <div class="ait-merit-lbl">주요 장점</div>
+      <div class="ait-merit-text">여러 문서를 동시에 업로드하여 통합 분석 및 교차 참조 가능</div>
+      <button class="ait-btn btn-notebook" onclick="window.open('https://notebooklm.google.com','_blank','noopener,noreferrer')">↗ 바로가기</button>
+    </div>
+
+    <!-- Suno AI -->
+    <div class="ait-card">
+      <div class="ait-icon ait-suno">🎵</div>
+      <div class="ait-name">Suno AI</div>
+      <div class="ait-desc">AI 기반 음악 생성 도구로, 텍스트 설명만으로 완성도 높은 음악을 제작합니다.</div>
+      <div class="ait-when-lbl">언제 사용하나요?</div>
+      <div class="ait-when-text">홍보 영상, 행사 배경음악, 캠페인 테마송 맞춤형 음악이 필요할 때</div>
+      <div class="ait-merit-lbl">주요 장점</div>
+      <div class="ait-merit-text">저작권 걱정 없는 오리지널 음악을 몇 분 안에 생성 가능</div>
+      <button class="ait-btn btn-suno" onclick="window.open('https://suno.com','_blank','noopener,noreferrer')">↗ 바로가기</button>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER CTA ─── -->
+<div class="footer-cta">
+  <button class="btn-footer-cta" onclick="window.open('prompt_page.html','_blank')">AI 프롬프트 공개 →</button>
+</div>
+<!-- ─── HIDE STATUS BAR URL ─── -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // 외부 링크(target=_blank)를 href="#" + onclick으로 교체 → 하단 URL 숨김
+  document.querySelectorAll('a[target="_blank"]').forEach(function (a) {
+    var url = a.getAttribute('href');
+    if (!url || url === '#') return;
+    a.setAttribute('href', 'javascript:void(0)');
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      window.open(url, '_blank', 'noopener,noreferrer');
+    });
+  });
+});
+</script>
+
+</body>
+</html>
