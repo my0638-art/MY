@@ -343,6 +343,9 @@ a.go { cursor: pointer; }
 .hero > * { animation: fadeUp .6s ease both; }
 .hero > *:nth-child(2) { animation-delay: .15s; }
 
+@media (max-width: 1200px) {
+  .tool-grid { grid-template-columns: repeat(3,1fr); }
+}
 @media (max-width: 960px) {
   .hero { grid-template-columns: 1fr; padding: 40px 24px; }
   .tool-grid, .cb-grid, .ait-grid { grid-template-columns: 1fr 1fr; }
