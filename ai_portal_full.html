@@ -119,8 +119,8 @@ nav {
 
 /* ─── AI TOOL CARDS (3 cols) ─── */
 .tool-grid {
-  display: grid; grid-template-columns: repeat(4,1fr);
-  gap: 22px; max-width: 1200px; margin: 0 auto 32px;
+  display: grid; grid-template-columns: repeat(5,1fr);
+  gap: 22px; max-width: 1400px; margin: 0 auto 32px;
 }
 .tool-card {
   border-radius: var(--radius); padding: 26px;
@@ -132,6 +132,7 @@ nav {
 .tc-blue   { background: linear-gradient(145deg,#eff6ff,#dbeafe); border-color: #bfdbfe; }
 .tc-purple { background: linear-gradient(145deg,#fff0f6,#fce7f3); border-color: #fbcfe8; }
 .tc-orange { background: linear-gradient(145deg,#fff7ed,#ffedd5); border-color: #fed7aa; }
+.tc-cyan   { background: linear-gradient(145deg,#f0fdfd,#ccfbf1); border-color: #99f6e4; }
 
 
 .tc-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
@@ -145,11 +146,12 @@ nav {
 .ic-blue   { background: linear-gradient(135deg,#60a5fa,#2563eb); }
 .ic-purple { background: linear-gradient(135deg,#f472b6,#ec4899); }
 .ic-orange { background: linear-gradient(135deg,#fb923c,#ea580c); }
+.ic-cyan   { background: linear-gradient(135deg,#2dd4bf,#0d9488); }
 
 
 .tc-name { font-size: 18px; font-weight: 800; }
 .tc-tagline { font-size: 12px; line-height: 1.5; margin-top: 2px; font-weight: 500; }
-.cl-green  { color: #15803d; } .cl-blue { color: #1d4ed8; } .cl-purple { color: #be185d; } .cl-orange { color: #c2410c; }
+.cl-green  { color: #15803d; } .cl-blue { color: #1d4ed8; } .cl-purple { color: #be185d; } .cl-orange { color: #c2410c; } .cl-cyan { color: #0f766e; }
 
 .goto-tag {
   padding: 6px 13px; border-radius: 20px; font-size: 12px; font-weight: 700;
@@ -161,6 +163,7 @@ nav {
 .gt-blue   { background: #3b82f6; color: #fff; }
 .gt-purple { background: #ec4899; color: #fff; }
 .gt-orange { background: #f97316; color: #fff; }
+.gt-cyan   { background: #14b8a6; color: #fff; }
 
 .tc-hr { height: 1px; background: rgba(0,0,0,.07); margin: 14px 0; }
 .tc-section-lbl {
@@ -569,7 +572,7 @@ a.go { cursor: pointer; }
       <p class="tc-task-text">장문 문서 검토, 정책 분석, 복잡한 행정 문서 작성 및 교정</p>
     </div>
 
-     <!-- GenSpark -->
+    <!-- GenSpark -->
     <div class="tool-card tc-cyan">
       <div class="tc-head">
         <div class="tc-logo">
